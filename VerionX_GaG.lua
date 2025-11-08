@@ -30,11 +30,6 @@ Title = "Main",
 Icon = "app-window",
 })
 
-local Section1 = MainTab:Section({
-Title = "Section1",
-Icon = "logs",
-})
-
 _G.sword = false
 
 MainTab:Toggle({
