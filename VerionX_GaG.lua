@@ -12,18 +12,53 @@ Background = "rbxassetid://97239349377509",
 })
 
 Window:EditOpenButton({
-    Title = "Open VerionHub",
-    Icon = "moon",
-    CornerRadius = UDim.new(0,4),
-    StrokeThickness = 2,
-    Color = ColorSequence.new( -- gradient
-        Color3.fromHex("0066CC"), 
-        Color3.fromHex("FFFFFF")
-    ),
-    OnlyMobile = false,
-    Enabled = true,
-    Draggable = true,
+    Enabled = false,
 })
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Nút chính
+local btn = Instance.new("ImageButton")
+btn.Parent = gui
+btn.Size = UDim2.new(0, 50, 0, 50)
+btn.Position = UDim2.new(0.5, -25, 0.5, -25)
+btn.BackgroundTransparency = 1
+btn.Draggable = true
+
+-- CHỈ GIỮ LẠI MỖI IMAGE (không crop)
+btn.Image = "rbxassetid://97239349377509"
+btn.ScaleType = Enum.ScaleType.Fit
+
+btn.MouseButton1Click:Connect(function()
+    Window:Toggle()
+end)
+
+-- Viền gradient
+local border = Instance.new("Frame")
+border.Parent = btn
+border.Size = UDim2.new(1, 4, 1, 4)
+border.Position = UDim2.new(0, -2, 0, -2)
+border.BackgroundTransparency = 0
+border.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+border.ZIndex = btn.ZIndex - 1
+border.ClipsDescendants = true
+
+-- Gradient xoay
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromHex("0066CC")),
+    ColorSequenceKeypoint.new(1, Color3.fromHex("FFFFFF")),
+}
+gradient.Parent = border
+
+task.spawn(function()
+    while true do
+        for i = 0, 360 do
+            gradient.Rotation = i
+            task.wait(0.01)
+        end
+    end
+end)
 
 local MainTab = Window:Tab({
 Title = "Main",
