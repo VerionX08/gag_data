@@ -92,13 +92,13 @@ coroutine.wrap(function()
                 :WaitForChild("GiantSwordPull")
                 :InvokeServer()
 end)()
-task.wait(0.05)
+task.wait(0.01)
         end
     end,
 })
 _G.seed = false
 local Toggle = MainTab:Toggle({
-    Title = "Auto unfreeze green bean guy",
+    Title = "Dupe Frostspike",
     Desc = "idk why I created this",
     Icon = "snowflake",
     Value = false, -- default value
